@@ -1,0 +1,36 @@
+{
+  "name": "Deutsch",
+  "logo": "<rect width=\"100\" height=\"100\" y=\"0\" x=\"0\" fill=\"#000\"/><rect width=\"100\" height=\"66\" y=\"34\" x=\"0\" fill=\"#D00\"/><rect width=\"100\" height=\"33\" y=\"67\" x=\"0\" fill=\"#FFCE00\"/>",
+  "shared": {
+    "colorSelector": {
+      "profile": "Farbschema"
+    }
+  },
+  "page": {
+    "join": {
+      "error": {
+        "code-to-short": "Der Code ist zu kurz (6 Zeichen)",
+        "code-to-long": "Der Code ist zu lang (6 Zeichen)",
+        "code-invalid-characters": "Der Code enthält ungültige Zeichen. Erlaubt sind nur Buchstaben und Zahlen",
+        "code-invalid": "Der Code ist ungültig",
+        "code-required": "Bitte gib einen Code ein",
+        "name-to-short": "Der Name ist zu kurz (Mind. 3 Zeichen)",
+        "name-to-long": "Der Name ist zu lang (Max. 16 Zeichen)",
+        "name-invalid-characters": "Der Name enthält ungültige Zeichen. Erlaubt sind nur Buchstaben und Zahlen",
+        "name-in-use": "Der Name wird bereits verwendet",
+        "name-required": "Bitte gib einen Namen ein"
+      },
+      "code": "Code",
+      "name": "Name",
+      "button": {
+        "next": "Weiter",
+        "join": "Beitreten"
+      }
+    }
+  },
+  "footer": {
+    "create-quiz": "Erstelle dein eigenes Quiz",
+    "github": "GitHub",
+    "data-protection": "Datenschutz"
+  }
+}

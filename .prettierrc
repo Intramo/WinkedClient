@@ -1,0 +1,10 @@
+{
+  "plugins": ["prettier-plugin-svelte"],
+  "printWidth": 256,
+  "tabWidth": 2,
+  "bracketSameLine": true,
+  "svelteStrictMode": false,
+  "svelteAllowShorthand": false,
+  "svelteBracketNewLine": false,
+  "svelteIndentScriptAndStyle": true
+}

@@ -1,0 +1,49 @@
+$COLORSCHEME_TRANSITION: 0.5s ease-in-out;
+$TRANSITION: 0.2s ease-in-out;
+$TRANSITION_FAST: 0.1s ease;
+
+$GAP: 1rem;
+
+.relwrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+@mixin flexbox($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-flow: $direction nowrap;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin flexbox-wrap($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-flow: $direction wrap;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin nointeract {
+  pointer-events: none;
+  user-select: none;
+}
+
+@mixin button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  background-color: #292929;
+  color: #fff;
+  border: 1px #000 solid;
+  padding: $GAP;
+  border-bottom: 5px #000 solid;
+  transform: translateY(0px);
+  transition: transform $TRANSITION;
+
+  &:hover {
+    transform: translateY(3px);
+  }
+}

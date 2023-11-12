@@ -1,0 +1,62 @@
+.option-selector {
+  position: relative;
+  align-items: flex-end;
+  gap: 0.5rem;
+  display: flex;
+  flex-flow: column nowrap;
+
+  button {
+    border: none;
+    font-weight: bold;
+    align-items: center;
+    font-size: 1rem;
+    border-radius: $GAP;
+    display: flex;
+    flex-flow: row nowrap;
+
+    svg {
+      height: 1.5rem;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    span {
+      pointer-events: none;
+    }
+  }
+
+  > * {
+    background-color: #fff;
+    color: #000;
+    padding: 0.5rem;
+    border-radius: $GAP;
+  }
+
+  .option-select {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    transform: translateY(0.5rem);
+
+    opacity: 0;
+    transition: opacity $TRANSITION_FAST;
+    pointer-events: none;
+    display: flex;
+    flex-flow: column nowrap;
+
+    &.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    button {
+      padding: 0.75rem;
+      background-color: transparent;
+
+      &:hover {
+        background-color: #ccc;
+      }
+    }
+  }
+}
