@@ -115,6 +115,11 @@
     </div>
   </div>
 
+  <footer class="footer {$colorScheme}">
+    <p><a href="#null">{$_("footer.create-quiz")}</a></p>
+    <p><a href="#null">{$_("footer.github")}</a> | <a href="#null">{$_("footer.data-protection")}</a></p>
+  </footer>
+
   {#if isLoading}
     <LoadingOverlay text={loadingString} />
   {/if}
@@ -122,6 +127,25 @@
 
 <style lang="scss">
   @import "../style/_globals.scss";
+
+  .footer {
+    position: absolute;
+    bottom: $GAP;
+    left: 50%;
+    transform: translateX(-50%);
+    @include flexbox(column);
+    gap: $GAP * 0.5;
+    color: #000;
+    p,
+    a {
+      margin: 0;
+      transition: color $COLORSCHEME_TRANSITION;
+    }
+    &.dark a,
+    &.dark {
+      color: #fff;
+    }
+  }
 
   .options {
     position: absolute;
