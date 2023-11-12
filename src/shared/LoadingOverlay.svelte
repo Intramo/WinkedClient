@@ -41,6 +41,7 @@
       max-width: 200px;
     }
     p {
+      max-width: calc(100% - #{$GAP * 2});
       position: relative;
       font-size: 2.5rem;
       font-weight: 500;
