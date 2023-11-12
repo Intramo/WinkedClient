@@ -140,10 +140,21 @@
     a {
       margin: 0;
       transition: color $COLORSCHEME_TRANSITION;
+      white-space: nowrap;
     }
     &.dark a,
     &.dark {
       color: #fff;
+    }
+  }
+
+  @media screen and (max-height: 450px) {
+    .footer {
+      display: none;
+    }
+    .pageJoin {
+      align-items: flex-end !important;
+      padding-bottom: $GAP;
     }
   }
 
