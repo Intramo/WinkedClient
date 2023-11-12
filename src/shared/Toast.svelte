@@ -36,9 +36,11 @@
       @keyframes fadeout {
         from {
           opacity: 1;
+          transform: translateX(0);
         }
         to {
           opacity: 0;
+          transform: translateX(-600px);
         }
       }
       border-radius: 0.5rem;
@@ -47,7 +49,7 @@
       font-size: 1.25rem;
       animation:
         fadein 0.5s,
-        fadeout 0.5s calc(var(--dur) - 1s) forwards;
+        fadeout 0.5s calc(var(--dur) - 500ms) forwards;
       max-width: 540px;
       &.error {
         background-color: #ff004d;
