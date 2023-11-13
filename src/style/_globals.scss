@@ -50,7 +50,6 @@ $COLOR_F_DARK: #039a9a;
   border: none;
   background-color: transparent;
   cursor: pointer;
-
   background-color: #292929;
   color: #fff;
   border: 1px #000 solid;
@@ -58,6 +57,8 @@ $COLOR_F_DARK: #039a9a;
   border-bottom: 5px #000 solid;
   transform: translateY(0px);
   transition: transform $TRANSITION;
+  user-select: none;
+  -webkit-user-select: none;
 
   &:hover {
     transform: translateY(3px);
