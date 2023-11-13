@@ -7,7 +7,7 @@
   import { _ } from "svelte-i18n";
   import { addToast } from "../shared/toastStore";
 
-  export let connectedCallback: void = () => {};
+  export let connectedCallback: () => void = () => {};
 
   let input: HTMLInputElement;
   let button: HTMLButtonElement;

@@ -1,8 +1,10 @@
 <script lang="ts">
   import { colorScheme } from "../stores";
+
+  export let isContrast = false;
 </script>
 
-<div class="background {$colorScheme}">
+<div class="background {$colorScheme} {isContrast ? 'contrast' : ''}">
   <div class="relwrap">
     <span style="--l: 25%; --r: 80px; --d: 0s; --dur: 25s" />
     <span style="--l: 10%; --r: 20px; --d: 2s; --dur: 12s" />
@@ -59,6 +61,13 @@
 
     &.pink {
       background-image: linear-gradient(to right, #ff758c, #ff7eb3);
+    }
+
+    &.contrast {
+      span {
+        display: none;
+      }
+      background-image: linear-gradient(to right, #ccc, #ccc);
     }
   }
 
