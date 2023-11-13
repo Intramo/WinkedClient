@@ -9,13 +9,13 @@
   "page": {
     "join": {
       "error": {
-        "code-to-short": "Der Code ist zu kurz (6 Zeichen)",
-        "code-to-long": "Der Code ist zu lang (6 Zeichen)",
+        "code-too-short": "Der Code ist zu kurz (Mind. 6 Zeichen)",
+        "code-too-long": "Der Code ist zu lang (Max. 6 Zeichen)",
         "code-invalid-characters": "Der Code enthält ungültige Zeichen. Erlaubt sind nur Buchstaben und Zahlen",
         "code-invalid": "Der Code ist ungültig",
         "code-required": "Bitte gib einen Code ein",
-        "name-to-short": "Der Name ist zu kurz (Mind. 3 Zeichen)",
-        "name-to-long": "Der Name ist zu lang (Max. 16 Zeichen)",
+        "name-too-short": "Der Name ist zu kurz (Mind. 3 Zeichen)",
+        "name-too-long": "Der Name ist zu lang (Max. 16 Zeichen)",
         "name-invalid-characters": "Der Name enthält ungültige Zeichen. Erlaubt sind nur Buchstaben und Zahlen",
         "name-in-use": "Der Name wird bereits verwendet",
         "name-required": "Bitte gib einen Namen ein"
@@ -25,6 +25,18 @@
       "button": {
         "next": "Weiter",
         "join": "Beitreten"
+      },
+      "loading": {
+        "check-code": "Überprüfe Code...",
+        "check-name": "Überprüfe Name...",
+        "connecting": "Verbinde zum Spielserver..."
+      }
+    },
+    "answer": {
+      "submit": "Senden",
+      "truefalse": {
+        "true": "Ja",
+        "false": "Nein"
       }
     }
   },

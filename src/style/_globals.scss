@@ -4,6 +4,21 @@ $TRANSITION_FAST: 0.1s ease;
 
 $GAP: 1rem;
 
+$PAGE_ANSWER_HEADER_HEIGHT: 3.5rem;
+
+$COLOR_A: #ce0541;
+$COLOR_B: #033ec9;
+$COLOR_C: #c9c903;
+$COLOR_D: #02bb39;
+$COLOR_E: #c903c9;
+$COLOR_F: #03c9c9;
+$COLOR_A_DARK: #a90032;
+$COLOR_B_DARK: #032d9c;
+$COLOR_C_DARK: #9c9a03;
+$COLOR_D_DARK: #029a2d;
+$COLOR_E_DARK: #9a039a;
+$COLOR_F_DARK: #039a9a;
+
 .relwrap {
   width: 100%;
   height: 100%;
@@ -27,6 +42,7 @@ $GAP: 1rem;
 @mixin nointeract {
   pointer-events: none;
   user-select: none;
+  -webkit-user-select: none;
 }
 
 @mixin button {
