@@ -2,6 +2,7 @@
   import PageClientJoin from "./page/PageClientJoin.svelte";
   import PageClientWait from "./page/PageClientWait.svelte";
   import PageClientAnswer from "./page/PageClientAnswer.svelte";
+  import PageHostLobby from "./page/PageHostLobby.svelte";
 
   import Background from "./page/Background.svelte";
   import Toast from "./shared/Toast.svelte";
@@ -14,18 +15,7 @@
     stage = 1;
   }
 
-  let stage = 2;
-
-  let demoQuestionData: QuestionTypeNormal = {
-    type: "multiple",
-    question: "Question?",
-    a: "A",
-    b: "B",
-    c: "C",
-    d: "D",
-    e: null,
-    f: null,
-  };
+  let stage = 0;
 </script>
 
 <Background isContrast={stage == 2} />
@@ -35,7 +25,20 @@
 {:else if stage == 1}
   <PageClientWait />
 {:else if stage == 2}
-  <PageClientAnswer data={demoQuestionData} answerCallback={onAnswer} />
+  <PageClientAnswer
+    data={{
+      type: "multiple",
+      question: "Question?",
+      a: "A",
+      b: "B",
+      c: "C",
+      d: "D",
+      e: null,
+      f: null,
+    }}
+    answerCallback={onAnswer} />
+{:else if stage == 10}
+  <PageHostLobby />
 {/if}
 
 <Toast />
