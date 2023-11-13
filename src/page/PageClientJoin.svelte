@@ -7,6 +7,8 @@
   import { _ } from "svelte-i18n";
   import { addToast } from "../shared/toastStore";
 
+  export let connectedCallback: void = () => {};
+
   let input: HTMLInputElement;
   let button: HTMLButtonElement;
 
@@ -90,7 +92,7 @@
         isLoading = false;
         loadingString = null;
         isCheckingName = false;
-        stage = 1;
+        connectedCallback();
       }, 1000);
     }, 1000);
   }

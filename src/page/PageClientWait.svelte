@@ -4,15 +4,13 @@
   let animFrame = -1;
   let dvd: HTMLElement;
   let hits = 0;
-  let dvdX = 50;
-  let dvdY = 80;
-  let dvdDirX = 1;
-  let dvdDirY = 1;
+  let dvdX = Math.floor(Math.random() * 100);
+  let dvdY = Math.floor(Math.random() * 100);
+  let dvdDirX = Math.random() > 0.5 ? 1 : -1;
+  let dvdDirY = Math.random() > 0.5 ? 1 : -1;
   let dvdColor = "#fff";
 
   function updateDVDPosition() {
-    animFrame = requestAnimationFrame(updateDVDPosition);
-
     const targetPixels = Math.min(window.innerHeight, window.innerHeight) * 0.3;
     const dvdSpeedX = targetPixels / window.innerWidth;
     const dvdSpeedY = targetPixels / window.innerHeight;
@@ -38,13 +36,15 @@
       hits += 1;
     }
     dvdColor = ["#ce0541", "#033ec9", "#02bb39", "#c9c903"][hits % 4];
+
+    animFrame = requestAnimationFrame(updateDVDPosition);
   }
 
   onMount(() => {
     updateDVDPosition();
-    return onDestroy(() => {
+    return () => {
       cancelAnimationFrame(animFrame);
-    });
+    };
   });
 </script>
 
