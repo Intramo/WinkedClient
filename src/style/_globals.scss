@@ -27,6 +27,7 @@ $GAP: 1rem;
 @mixin nointeract {
   pointer-events: none;
   user-select: none;
+  -webkit-user-select: none;
 }
 
 @mixin button {
