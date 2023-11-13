@@ -22,7 +22,7 @@
     top: $GAP;
     left: $GAP;
     @include nointeract;
-    @include flexbox(column);
+    @include flexbox(column, flex-start, flex-start);
     overflow: hidden;
     .toast {
       @keyframes fadein {

@@ -31,6 +31,13 @@
         "check-name": "Überprüfe Name...",
         "connecting": "Verbinde zum Spielserver..."
       }
+    },
+    "answer": {
+      "submit": "Senden",
+      "truefalse": {
+        "true": "Ja",
+        "false": "Nein"
+      }
     }
   },
   "footer": {
