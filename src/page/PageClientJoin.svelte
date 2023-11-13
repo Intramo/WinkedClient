@@ -5,6 +5,9 @@
   import { colorScheme } from "../stores";
   import logoSrc from "../assets/logo.svg";
   import { _ } from "svelte-i18n";
+  import { addToast } from "../shared/toastStore";
+  
+  export let connectedCallback: () => void = () => {};
 
   let input: HTMLInputElement;
   let button: HTMLButtonElement;
@@ -17,7 +20,82 @@
   let isLoading: boolean = false;
   let loadingString: string | null = null;
 
-  function checkGameCode() {}
+  let isCheckingCode: boolean = false;
+  let isCheckingName: boolean = false;
+
+  function onType(event: KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement }) {
+    if (event.key == "Enter") {
+      button.click();
+    }
+  }
+
+  function isCodeSyntaxValid(): string {
+    if (enteredCode.length == 0) return "page.join.error.code-required";
+    if (enteredCode.length < 6) return "page.join.error.code-too-short";
+    if (enteredCode.length > 6) return "page.join.error.code-too-long";
+    if (enteredCode.match(/[^A-Za-z0-9]/)) return "page.join.error.code-invalid-characters";
+    return "";
+  }
+
+  function isNameSyntaxValid(): string {
+    if (enteredName?.length == 0 || enteredName == null) return "page.join.error.name-required";
+    if (enteredName.length < 3) return "page.join.error.name-too-short";
+    if (enteredName.length > 16) return "page.join.error.name-too-long";
+    if (enteredName.match(/[^A-Za-z0-9]/)) return "page.join.error.name-invalid-characters";
+    return "";
+  }
+
+  function checkGameCode() {
+    let error = isCodeSyntaxValid();
+    if (error.length > 0) {
+      if (input.classList.contains("error")) {
+        input.classList.remove("error");
+        input.offsetWidth;
+      }
+      input.classList.add("error");
+      addToast($_(error));
+      return;
+    }
+
+    if (isCheckingCode) return;
+    isCheckingCode = true;
+    isLoading = true;
+    loadingString = $_("page.join.loading.check-code");
+
+    setTimeout(() => {
+      isLoading = false;
+      loadingString = null;
+      isCheckingCode = false;
+      stage = 1;
+    }, 1000);
+  }
+
+  function checkName() {
+    let error = isNameSyntaxValid();
+    if (error.length > 0) {
+      if (input.classList.contains("error")) {
+        input.classList.remove("error");
+        input.offsetWidth;
+      }
+      input.classList.add("error");
+      addToast($_(error));
+      return;
+    }
+
+    if (isCheckingName) return;
+    isCheckingName = true;
+    isLoading = true;
+    loadingString = $_("page.join.loading.check-name");
+    setTimeout(() => {
+      loadingString = $_("page.join.loading.connecting");
+      setTimeout(() => {
+        isLoading = false;
+        loadingString = null;
+        isCheckingName = false;
+        connectedCallback();
+      }, 1000);
+    }, 1000);
+  }
 </script>
 
 <section class="relwrap pageJoin">
@@ -30,14 +108,19 @@
     <img src={logoSrc} alt="Winked" />
     <div class="form">
       {#if stage == 0}
-        <input class="code" type="text" placeholder={$_("page.join.code")} maxlength="6" minlength="6" bind:this={input} />
-        <button bind:this={button}>{$_("page.join.button.next")}</button>
+        <input class="input code" type="text" placeholder={$_("page.join.code")} maxlength="6" minlength="6" bind:this={input} bind:value={enteredCode} on:keydown={onType} />
+        <button bind:this={button} on:click={checkGameCode}>{$_("page.join.button.next")}</button>
       {:else}
-        <input class="code" type="text" placeholder={$_("page.join.name")} maxlength="6" minlength="6" bind:this={input} />
-        <button bind:this={button}>{$_("page.join.button.join")}</button>
+        <input class="input name" type="text" placeholder={$_("page.join.name")} maxlength="6" minlength="6" bind:this={input} bind:value={enteredName} on:keydown={onType} />
+        <button bind:this={button} on:click={checkName}>{$_("page.join.button.join")}</button>
       {/if}
     </div>
   </div>
+
+  <footer class="footer {$colorScheme}">
+    <p><a href="#null">{$_("footer.create-quiz")}</a></p>
+    <p><a href="#null">{$_("footer.github")}</a> | <a href="#null">{$_("footer.data-protection")}</a></p>
+  </footer>
 
   {#if isLoading}
     <LoadingOverlay text={loadingString} />
@@ -46,6 +129,36 @@
 
 <style lang="scss">
   @import "../style/_globals.scss";
+
+  .footer {
+    position: absolute;
+    bottom: $GAP;
+    left: 50%;
+    transform: translateX(-50%);
+    @include flexbox(column);
+    gap: $GAP * 0.5;
+    color: #000;
+    p,
+    a {
+      margin: 0;
+      transition: color $COLORSCHEME_TRANSITION;
+      white-space: nowrap;
+    }
+    &.dark a,
+    &.dark {
+      color: #fff;
+    }
+  }
+
+  @media screen and (max-height: 450px) {
+    .footer {
+      display: none;
+    }
+    .pageJoin {
+      align-items: flex-end !important;
+      padding-bottom: $GAP;
+    }
+  }
 
   .options {
     position: absolute;
@@ -88,7 +201,7 @@
         overflow: hidden;
         position: relative;
 
-        input {
+        .input {
           position: relative;
           color: #000;
           border: 2px #757575 solid;
@@ -112,12 +225,12 @@
               40%,
               80% {
                 transform: translate(0.5rem, 0px);
-                animation: 0.4s ease 0s 1 normal none running form-input-error-shake;
-                border-color: #ff004d;
-                background-color: #ff004d;
-                background: url("https://assets-cdn.kahoot.it/controller/v2/assets/icn_field_error-dfdd7c8c.svg") right center / 1.5rem 1.5rem no-repeat scroll rgb(255, 242, 244);
               }
             }
+            animation: 0.4s ease 0s 1 normal none running form-input-error-shake;
+            border-color: #ff004d;
+            background-color: #ff004d;
+            background: url("https://assets-cdn.kahoot.it/controller/v2/assets/icn_field_error-dfdd7c8c.svg") right center / 1.5rem 1.5rem no-repeat scroll rgb(255, 242, 244);
           }
         }
 
