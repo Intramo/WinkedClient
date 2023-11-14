@@ -32,6 +32,15 @@
         "connecting": "Verbinde zum Spielserver..."
       }
     },
+    "lobby": {
+      "waiting": "Warte auf Spieler...",
+      "join1": "Tritt dem Spiel unter",
+      "join2": "bei",
+      "code": "Code",
+      "stats": {
+        "players": "Spieler"
+      }
+    },
     "answer": {
       "submit": "Senden",
       "truefalse": {

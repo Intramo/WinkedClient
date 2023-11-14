@@ -15,6 +15,10 @@
     stage = 1;
   }
 
+  function onPlayerKick(player: string) {
+    console.log("Kick: " + player);
+  }
+
   let stage = 0;
 </script>
 
@@ -38,7 +42,7 @@
     }}
     answerCallback={onAnswer} />
 {:else if stage == 10}
-  <PageHostLobby />
+  <PageHostLobby players={[]} playerKickCallback={onPlayerKick} />
 {/if}
 
 <Toast />

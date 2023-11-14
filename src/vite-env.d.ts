@@ -25,4 +25,6 @@ interface JSONArray extends Array<JSONValue> {}
 // OPTIONS
 type HostOptions = {
   showAnswersTextOnPlayerDevices: boolean;
+  randomizedPlayerNames: boolean;
+  sessionLocked: boolean;
 };
