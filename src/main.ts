@@ -1,7 +1,6 @@
 import "./style/app.scss";
 import "./i18n";
 import App from "./App.svelte";
-import "./stores";
 
 const target = document.getElementById("app");
 if (!target) {

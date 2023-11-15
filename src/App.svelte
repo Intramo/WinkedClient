@@ -7,7 +7,7 @@
   import Background from "./page/Background.svelte";
   import Toast from "./shared/Toast.svelte";
 
-  function onGameJoin() {
+  function onGameJoin(data: apiRouteValidateResponse) {
     stage = 1;
   }
 

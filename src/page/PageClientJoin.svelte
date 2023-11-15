@@ -2,12 +2,13 @@
   import ColorSchemeSelector from "../shared/ColorSchemeSelector.svelte";
   import LanguageSelector from "../shared/LanguageSelector.svelte";
   import LoadingOverlay from "../shared/LoadingOverlay.svelte";
-  import { colorScheme } from "../stores";
+  import { colorScheme } from "../uiStore";
   import logoSrc from "../assets/logo.svg";
   import { _ } from "svelte-i18n";
   import { addToast } from "../shared/toastStore";
-  
-  export let connectedCallback: () => void = () => {};
+  import { api_validate } from "../server";
+
+  export let connectedCallback: (data: apiRouteValidateResponse) => void = () => {};
 
   let input: HTMLInputElement;
   let button: HTMLButtonElement;
@@ -45,14 +46,18 @@
     return "";
   }
 
+  function shakeInput() {
+    if (input.classList.contains("error")) {
+      input.classList.remove("error");
+      input.offsetWidth;
+    }
+    input.classList.add("error");
+  }
+
   function checkGameCode() {
     let error = isCodeSyntaxValid();
     if (error.length > 0) {
-      if (input.classList.contains("error")) {
-        input.classList.remove("error");
-        input.offsetWidth;
-      }
-      input.classList.add("error");
+      shakeInput();
       addToast($_(error));
       return;
     }
@@ -61,23 +66,29 @@
     isCheckingCode = true;
     isLoading = true;
     loadingString = $_("page.join.loading.check-code");
-
-    setTimeout(() => {
+    api_validate(enteredCode).then((result) => {
       isLoading = false;
       loadingString = null;
       isCheckingCode = false;
-      stage = 1;
-    }, 1000);
+      if (result) {
+        if (result.success) {
+          connectedCallback(result);
+        } else if (result.error.length > 0) {
+          shakeInput();
+          addToast($_(result.error));
+        } else {
+          stage = 1;
+        }
+      } else {
+        addToast($_("server.error.connection"));
+      }
+    });
   }
 
   function checkName() {
     let error = isNameSyntaxValid();
     if (error.length > 0) {
-      if (input.classList.contains("error")) {
-        input.classList.remove("error");
-        input.offsetWidth;
-      }
-      input.classList.add("error");
+      shakeInput();
       addToast($_(error));
       return;
     }
@@ -86,15 +97,23 @@
     isCheckingName = true;
     isLoading = true;
     loadingString = $_("page.join.loading.check-name");
-    setTimeout(() => {
-      loadingString = $_("page.join.loading.connecting");
-      setTimeout(() => {
-        isLoading = false;
-        loadingString = null;
-        isCheckingName = false;
-        connectedCallback();
-      }, 1000);
-    }, 1000);
+    api_validate(enteredCode, enteredName).then((result) => {
+      isLoading = false;
+      loadingString = null;
+      isCheckingName = false;
+      if (result) {
+        if (result.success) {
+          connectedCallback(result);
+        } else if (result.error.length > 0) {
+          shakeInput();
+          addToast($_(result.error));
+        } else {
+          stage = 1;
+        }
+      } else {
+        addToast($_("server.error.connection"));
+      }
+    });
   }
 </script>
 

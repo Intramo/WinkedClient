@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { colorScheme } from "../stores";
+  import { colorScheme } from "../uiStore";
 
   export let isContrast = false;
 </script>

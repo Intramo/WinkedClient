@@ -28,3 +28,9 @@ type HostOptions = {
   randomizedPlayerNames: boolean;
   sessionLocked: boolean;
 };
+
+type apiRouteValidateResponse = {
+  success: boolean;
+  error: string;
+  token: string | null;
+};

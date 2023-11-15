@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
   import { locale, locales, _, dictionary } from "svelte-i18n";
-  import { colorScheme } from "../stores";
+  import { colorScheme } from "../uiStore";
 
   let menuOpen = false;
   let button: HTMLButtonElement;

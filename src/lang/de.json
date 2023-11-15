@@ -49,6 +49,11 @@
       }
     }
   },
+  "server": {
+    "error": {
+      "connection": "Verbindung zum Server fehlgeschlagen"
+    }
+  },
   "footer": {
     "create-quiz": "Erstelle dein eigenes Quiz",
     "github": "GitHub",
