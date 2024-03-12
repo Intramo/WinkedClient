@@ -118,3 +118,13 @@
 #pagePlayerJoin .content>.language-container>.language-select>.language-selection>div:hover {
     background-color: #75757546;
 }
+
+#creatingConnectionOverlay{
+    z-index: 9999999998;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #75757569;   
+}
